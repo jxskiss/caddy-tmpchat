@@ -1,0 +1,6 @@
+http://localhost:8080 {
+    route /abc/tmpchat {
+        tmpchat
+    }
+    respond "hello world" 200
+}
