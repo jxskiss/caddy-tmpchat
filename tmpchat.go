@@ -2,7 +2,6 @@ package tmpchat
 
 import (
 	_ "embed"
-	"log"
 	"net/http"
 	"sync"
 	"time"
@@ -158,7 +157,7 @@ func (s *ChatServer) serveWebsocket(w http.ResponseWriter, r *http.Request) {
 	username := r.URL.Query().Get("u")
 	conn, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
-		log.Printf("Failed to upgrade connection: %v", err)
+		s.logger.Info("Failed to upgrade websocket connection", zap.Error(err))
 		return
 	}
 
@@ -208,7 +207,7 @@ func (c *Client) readPump() {
 		err := c.conn.ReadJSON(&msg)
 		if err != nil {
 			if websocket.IsUnexpectedCloseError(err, websocket.CloseGoingAway, websocket.CloseAbnormalClosure) {
-				log.Printf("Error reading message: %v", err)
+				c.server.logger.Info("Error receiving websocket message", zap.Error(err))
 			}
 			break
 		}
@@ -243,7 +242,7 @@ func (c *Client) writePump() {
 			// Send the message
 			err := c.conn.WriteJSON(message)
 			if err != nil {
-				log.Printf("Error writing message: %v", err)
+				c.server.logger.Info("Error sending websocket message", zap.Error(err))
 				return
 			}
 
