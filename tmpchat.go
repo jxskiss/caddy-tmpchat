@@ -56,10 +56,11 @@ type ChatServer struct {
 // NewChatServer creates a new server
 func NewChatServer() *ChatServer {
 	return &ChatServer{
-		broadcast: make(chan Message, 100),
+		clients:   make(map[*Client]bool),
 		online:    make(chan *Client),
 		offline:   make(chan *Client),
-		clients:   make(map[*Client]bool),
+		broadcast: make(chan Message, 100),
+		closeCh:   make(chan struct{}),
 	}
 }
 
