@@ -20,7 +20,7 @@ TmpChat is a lightweight, real-time web chat application built with Go and WebSo
 
 1. Build with xcaddy:
    ```bash
-   xcaddy build --with github.com/jxskiss/tmpchat
+   xcaddy build --with github.com/jxskiss/caddy-tmpchat
    ```
 
 2. Edit your Caddyfile to configure tmpchat:

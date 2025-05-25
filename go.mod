@@ -1,4 +1,4 @@
-module github.com/jxskiss/tmpchat
+module github.com/jxskiss/caddy-tmpchat
 
 go 1.24
 

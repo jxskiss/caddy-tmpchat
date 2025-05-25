@@ -35,7 +35,7 @@ import (
 	_ "github.com/caddyserver/caddy/v2/modules/standard"
 
 	// custom plugins
-	_ "github.com/jxskiss/tmpchat"
+	_ "github.com/jxskiss/caddy-tmpchat"
 )
 
 func main() {
